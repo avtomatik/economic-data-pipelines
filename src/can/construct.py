@@ -7,18 +7,16 @@ Created on Sat Sep 18 22:20:54 2021
 
 
 import pandas as pd
+from common.funcs import get_pre_kwargs
+
 from can.constants import (BLUEPRINT_CAPITAL, BLUEPRINT_LABOUR,
                            BLUEPRINT_PRODUCT)
 from can.stockpile import stockpile_can
-from common.funcs import get_pre_kwargs
-from core.config import BASE_DIR
+from core.paths import BASE_DIR
 
 
-def main(
-    series_ids: dict[str, int],
-    file_name: str = 'stat_can_desc.csv'
-):
-    FILE_NAMES = ('stat_can_cap.csv', 'stat_can_lab.csv', 'stat_can_prd.csv')
+def main(series_ids: dict[str, int], file_name: str = "stat_can_desc.csv"):
+    FILE_NAMES = ("stat_can_cap.csv", "stat_can_lab.csv", "stat_can_prd.csv")
     # =========================================================================
     # Construct CSV File from Specification
     # =========================================================================
@@ -28,8 +26,7 @@ def main(
     # Retrieve Series Description
     # =========================================================================
     df = pd.concat(
-        map(lambda _: pd.read_csv(**get_pre_kwargs(_)), FILE_NAMES),
-        axis=1
+        map(lambda _: pd.read_csv(**get_pre_kwargs(_)), FILE_NAMES), axis=1
     )
 
     pd.merge(
@@ -37,8 +34,8 @@ def main(
         df.transpose(),
         left_index=True,
         right_index=True,
-    ).transpose().to_csv(BASE_DIR.joinpath(file_name))
+    ).transpose().to_csv(BASE_DIR / file_name)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main(BLUEPRINT_CAPITAL | BLUEPRINT_LABOUR | BLUEPRINT_PRODUCT)

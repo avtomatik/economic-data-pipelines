@@ -11,27 +11,28 @@ import re
 from pathlib import Path
 from typing import Any, Union
 
-from core.config import DATA_DIR
 from openpyxl import load_workbook
 from xlrd import open_workbook
 
+from core.paths import DATA_DIR
+
 
 def get_file_names(matchers):
-    return [name for name in tuple(os.listdir()) if any(match in name for match in matchers)]
+    return [
+        name
+        for name in tuple(os.listdir())
+        if any(match in name for match in matchers)
+    ]
 
 
 def get_file_names(path_src: str):
     return filter(
-        lambda _: re.match('^dataset_che_(.*?)\.xls$', _), os.listdir(path_src)
+        lambda _: re.match("^dataset_che_(.*?)\.xls$", _), os.listdir(path_src)
     )
 
 
 def get_xl_sheetnames(filepath: Union[str, Path]) -> list[str]:
-    kwargs = {
-        'filename': filepath,
-        'readonly': True,
-        'keep_links': False
-    }
+    kwargs = {"filename": filepath, "readonly": True, "keep_links": False}
     return load_workbook(**kwargs).sheetnames
 
 
@@ -39,23 +40,8 @@ def get_xl_sheetnames(filepath: Union[str, Path]) -> list[str]:
     return open_workbook(filepath).sheet_names()
 
 
-def archive_name_to_url(archive_name: str) -> str:
-    """
-    Parameters
-    ----------
-    archive_name : str
-        DESCRIPTION.
-    Returns
-    -------
-    str
-        DESCRIPTION.
-    """
-    return f'https://www150.statcan.gc.ca/n1/tbl/csv/{archive_name}'
-
-
 def dichotomize_series_ids(
-    series_ids: dict[str, int],
-    source_ids: tuple[int]
+    series_ids: dict[str, int], source_ids: tuple[int]
 ) -> tuple[dict[str, int]]:
     """
     Parameters
@@ -71,11 +57,15 @@ def dichotomize_series_ids(
     """
     return (
         {
-            key: value for key, value in series_ids.items() if not value in source_ids
+            key: value
+            for key, value in series_ids.items()
+            if value not in source_ids
         },
         {
-            key: value for key, value in series_ids.items() if value in source_ids
-        }
+            key: value
+            for key, value in series_ids.items()
+            if value in source_ids
+        },
     )
 
 
@@ -95,31 +85,34 @@ def get_pre_kwargs(file_name: str) -> dict[str, Any]:
 
     """
     return {
-        'filepath_or_buffer': DATA_DIR.joinpath(file_name),
-        'index_col': 0,
+        "filepath_or_buffer": DATA_DIR / file_name,
+        "index_col": 0,
     }
 
 
 def get_kwargs_usa_frb_gvp_sa() -> dict[str, Any]:
     """'T50030: Final products and nonindustrial supplies--gross value'"""
-    FILE_NAME = 'dataset_usa_frb_gvp_sa.txt'
+    FILE_NAME = "dataset_usa_frb_gvp_sa.txt"
     return {
-        'filepath_or_buffer': DATA_DIR.joinpath(FILE_NAME),
-        'sep': '\s+',
-        'header': None,
-        'skiprows': 1,
-        'nrows': 29,
-        'index_col': 1
+        "filepath_or_buffer": DATA_DIR / FILE_NAME,
+        "sep": "\s+",
+        "header": None,
+        "skiprows": 1,
+        "nrows": 29,
+        "index_col": 1,
     }
 
 
 def get_kwargs_usa_bls_ap_pc() -> dict[str, Any]:
 
-    FILE_NAME = 'usa_science_data.zip/pc.df.0.Current' or 'usa_science_data.zip/ap.df.0.Current'
+    FILE_NAME = (
+        "usa_science_data.zip/pc.df.0.Current"
+        or "usa_science_data.zip/ap.df.0.Current"
+    )
 
     return {
-        'filepath_or_buffer': DATA_DIR.joinpath(FILE_NAME),
-        'sep': '\t',
-        'index_col': range(4),
-        'usecols': 1,
+        "filepath_or_buffer": DATA_DIR / FILE_NAME,
+        "sep": "\t",
+        "index_col": range(4),
+        "usecols": 1,
     }

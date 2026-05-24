@@ -1,4 +1,3 @@
-
 from stats.src.can.constants import CAN_GROSS_FIXED_CAPITAL_FORMATION
 from stats.src.can.read import read_can_groupby
 from thesis.src.lib.stockpile import stockpile_can
@@ -12,7 +11,7 @@ read_can_groupby(file_id)
 
 for series_id in CAN_GROSS_FIXED_CAPITAL_FORMATION:
     print(
-        stockpile_can(
-            {series_id['series_id']: series_id['table']}
-        ).pipe(transform_year_sum)
+        stockpile_can({series_id["series_id"]: series_id["table"]}).pipe(
+            transform_year_sum
+        )
     )

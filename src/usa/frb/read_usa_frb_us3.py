@@ -13,7 +13,7 @@ import pandas as pd
 import requests
 from lxml import etree
 
-URL = 'https://www.federalreserve.gov/datadownload/Output.aspx?rel=g17&filetype.zip'
+URL = "https://www.federalreserve.gov/datadownload/Output.aspx?rel=g17&filetype.zip"
 
 with zipfile.ZipFile(io.BytesIO(requests.get(URL).content)) as archive:
     # =========================================================================
@@ -35,7 +35,8 @@ with zipfile.ZipFile(io.BytesIO(requests.get(URL).content)) as archive:
             row = []
 
             # use more xpath expressions to get to the target attributes
-            row.extend([r.xpath('.//@TIME_PERIOD')[0],
-                        r.xpath('.//@OBS_VALUE')[0]])
+            row.extend(
+                [r.xpath(".//@TIME_PERIOD")[0], r.xpath(".//@OBS_VALUE")[0]]
+            )
             rows.append(row)
         frdf = pd.DataFrame(rows, columns=cols)
