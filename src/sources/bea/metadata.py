@@ -50,8 +50,10 @@ def normalize_bea_metadata(
         "data_published",
         "file_created",
     )
-    df.iloc[:, -1] = (
-        df.iloc[:, -1].str.replace("File created ", "").apply(pd.to_datetime)
+    df["file_created"] = (
+        df["file_created"]
+        .str.replace("File created ", "")
+        .apply(pd.to_datetime)
     )
     df["wb_name"] = wb_name
     df["sheet_name"] = sheet_name

@@ -7,7 +7,7 @@ from sources.bls.constants import (BASE_API_URL, BASE_API_URLS,
                                    BLS_READ_KWARGS, contents_table)
 
 
-def main() -> None:
+def run() -> None:
     for line in contents_table.split("\n"):
         response = requests.get("/".join((BASE_API_URL, line.split()[-1])))
 
