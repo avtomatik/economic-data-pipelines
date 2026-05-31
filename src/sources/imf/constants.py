@@ -1,1 +1,0 @@
-WEO_SERIES_IDS = ["NGDP_R", "NGDP", "NGDPD", "NGDP_D"]

@@ -1,7 +1,7 @@
 [project]
 name = "econ-data-platform"
 version = "0.1.0"
-description = "Add your description here"
+description = "Reproducible ingestion and normalization pipelines for public macroeconomic datasets (BEA, IMF, Federal Reserve, StatCan)."
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
