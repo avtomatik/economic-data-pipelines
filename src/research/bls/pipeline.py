@@ -1,11 +1,10 @@
-from core.io import read_csv
-from datasets.bls.constants import BASE_API_URL, BASE_API_URLS, BLS_READ_KWARGS, contents_table
-
+import io
 
 import requests
 
-
-import io
+from core.io import read_csv
+from datasets.bls.constants import (BASE_API_URL, BASE_API_URLS,
+                                    BLS_READ_KWARGS, contents_table)
 
 
 def run() -> None:

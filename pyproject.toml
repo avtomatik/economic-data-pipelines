@@ -1,5 +1,5 @@
 [project]
-name = "econ-data-platform"
+name = "economic-data-pipelines"
 version = "0.1.0"
 description = "Reproducible ingestion and normalization pipelines for public macroeconomic datasets (BEA, IMF, Federal Reserve, StatCan)."
 readme = "README.md"

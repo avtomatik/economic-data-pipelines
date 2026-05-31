@@ -21,6 +21,4 @@ def filter_series(df: pd.DataFrame) -> pd.DataFrame:
 def filter_actual_observations(
     df: pd.DataFrame,
 ) -> pd.DataFrame:
-    return df[
-        df["source"] != "Estimates Start After"
-    ]
+    return df[df["source"] != "Estimates Start After"]

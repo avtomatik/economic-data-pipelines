@@ -1,8 +1,7 @@
+from pathlib import Path
+
 from core.io import read_excel
 from research.che.readers import get_sheet_names
-
-
-from pathlib import Path
 
 
 def run(data_dir: Path) -> None:

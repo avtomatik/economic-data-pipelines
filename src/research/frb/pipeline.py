@@ -1,11 +1,9 @@
-from datasets.frb.constants import API_URL
-from datasets.frb.readers import read_api_response
-
+import io
 
 import requests
 
-
-import io
+from datasets.frb.constants import API_URL
+from datasets.frb.readers import read_api_response
 
 
 def run() -> None:

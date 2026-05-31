@@ -1,7 +1,6 @@
-from openpyxl import load_workbook
-
-
 from pathlib import Path
+
+from openpyxl import load_workbook
 
 
 def get_sheet_names(file_path: Path) -> list[str]:
